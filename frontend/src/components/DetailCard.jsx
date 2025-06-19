@@ -4,58 +4,49 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function DetailCard({ note }) {
-    const btnStyle = {
-        padding: "0.5em 1em",
-        fontSize: "1.1em",
-        letterSpacing: "1px",
-        background: "linear-gradient(#c53913, #f5400f)",
-        color: "#f4f0e4",
-        border: "none",
-        borderRadius: "10px",
-        cursor: "pointer",
-        textDecoration: "none",
-    };
-    const navigate = useNavigate();
-    const deleteNote = () => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios
-                    .delete(`https://mern-notes-backend-5z2j.onrender.com/deleteNote/${note._id}`)
-                    .then(() => {
-                        navigate("/");
-                        Swal.fire(
-                            "Deleted!",
-                            "Your Note has been deleted.",
-                            "success"
-                        );
-                    })
-                    .catch((err) => console.error(err));
-            } else {
-                return;
-            }
-        });
-    };
-    return (
-        <div className="note-details">
-            <h1 className="title">{note.title}</h1>
-            <p className="details">{note.details}</p>
-            <div className="action">
-                <Link style={btnStyle} to={`/edit/${note._id}`}>
-                    {" "}
-                    Edit
-                </Link>
-                <button style={btnStyle} onClick={deleteNote}>
-                    Delete
-                </button>
-            </div>
-        </div>
-    );
+  const navigate = useNavigate();
+
+  const deleteNote = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`https://mern-notes-backend-5z2j.onrender.com/deleteNote/${note._id}`)
+          .then(() => {
+            navigate("/");
+            Swal.fire("Deleted!", "Your note has been deleted.", "success");
+          })
+          .catch((err) => console.error(err));
+      }
+    });
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto mt-10 bg-white/90 shadow-xl rounded-2xl p-8 space-y-6">
+      <h1 className="text-3xl font-bold text-indigo-700">{note.title}</h1>
+      <p className="text-gray-700 text-lg whitespace-pre-wrap">{note.details}</p>
+
+      <div className="flex justify-end gap-4 pt-4 border-t border-gray-200">
+        <Link
+          to={`/edit/${note._id}`}
+          className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-700 transition duration-200"
+        >
+          Edit
+        </Link>
+        <button
+          onClick={deleteNote}
+          className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 text-white font-semibold shadow-md hover:from-red-600 hover:to-orange-600 transition duration-200"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  );
 }

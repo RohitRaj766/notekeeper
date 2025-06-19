@@ -1,52 +1,50 @@
 import React, { useEffect, useState } from "react";
 import AddNote from "../components/AddNote";
 import NoteCard from "../components/NoteCard";
-import axios from "axios";
+import api from "../services/api";
 
 export default function Home() {
-    const msgStyle = {
-        justifyContent: "center",
-        display: "flex",
-        alignItems: "center",
-        height: "50vh",
-        color: "#aaa",
-        letterSpacing: "1px",
-        fontSize: "1.3em",
-    };
-    const [notes, setNotes] = useState([]);
-    useEffect(() => {
-        const fetchNotes = () => {
-            axios
-                .get("https://mern-notes-backend-5z2j.onrender.com/allNotes")
-                .then((res) => {
-                    if (res.data.content) {
-                        setNotes(res.data.content);
-                    } else {
-                        setNotes([]);
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
-        fetchNotes();
-    }, []);
-    return (
-        <div>
-            <h1 className="headline">
-                Save Your <span>Notes</span> Here
-            </h1>
+  const [notes, setNotes] = useState([]);
 
-            <div className="cards">
-                {notes && notes.length > 0 ? (
-                    notes.map((note) => (
-                        <NoteCard key={note._id} note={note} />
-                    ))
-                ) : (
-                    <p style={msgStyle}>No Notes To Show</p>
-                )}
-            </div>
-            <AddNote />
+  useEffect(() => {
+    const fetchNotes = () => {
+      api
+        .get("/allNotes")
+        .then((res) => {
+          if (res.data.content) {
+            setNotes(res.data.content);
+          } else {
+            setNotes([]);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchNotes();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 px-6 py-12 flex flex-col items-center">
+      <h1 className="text-white text-4xl font-extrabold mb-12 drop-shadow-lg text-center max-w-3xl">
+        Save Your <span className="text-yellow-400">Notes</span> Here
+      </h1>
+
+      {notes && notes.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-7xl">
+          {notes.map((note) => (
+            <NoteCard key={note._id} note={note} />
+          ))}
         </div>
-    );
+      ) : (
+        <p className="flex justify-center items-center h-64 text-gray-300 text-lg tracking-wide">
+          No Notes To Show
+        </p>
+      )}
+   
+      <div className="w-full max-w-3xl mt-14">
+        <AddNote />
+      </div>
+    </div>
+  );
 }
