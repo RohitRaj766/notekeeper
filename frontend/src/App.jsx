@@ -8,25 +8,45 @@ import Signup from "./pages/Signup";
 import Head from "./components/Head";
 import { useAuth } from "./context/AuthContext";
 
-
 function App() {
-    const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-    return (
-        <Router>
-            <Head />
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+  if (loading) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
 
-                {/* Protected Routes */}
-                <Route path="/dashboard" element={user ? <Home /> : <Navigate to="/login" />} />
-                <Route path="/add" element={user ? <AddForm /> : <Navigate to="/login" />} />
-                <Route path="/details/:id" element={user ? <NoteDetails /> : <Navigate to="/login" />} />
-                <Route path="/edit/:id" element={user ? <EditForm /> : <Navigate to="/login" />} />
-            </Routes>
-        </Router>
-    );
+  return (
+    <Router>
+      <Head />
+      <Routes>
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate to="/dashboard" replace />}
+        />
+        <Route
+          path="/signup"
+          element={!user ? <Signup /> : <Navigate to="/dashboard" replace />}
+        />
+        <Route
+          path="/dashboard"
+          element={user ? <Home /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/add"
+          element={user ? <AddForm /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/details/:id"
+          element={user ? <NoteDetails /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/edit/:id"
+          element={user ? <EditForm /> : <Navigate to="/login" replace />}
+        />
+        <Route path="*" element={<Navigate to={user ? "/dashboard" : "/login"} replace />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
