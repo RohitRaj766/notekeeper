@@ -40,6 +40,8 @@ MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 npm run dev
 
+---
+
 ### 3. Frontend
 ```bash
 cd frontend
