@@ -24,26 +24,8 @@ A simple and secure web application to save, search, and manage your important n
 
 ---
 
-### 1. Clone the repository
+### Clone the repository
+
 ```bash
 git clone https://github.com/yourusername/notekeeper.git
-cd notekeeper ```
-
----
-
-### 2. Server Create a .env file in the server folder with the following:
-```bash
-cd server
-npm install
-PORT=5000
-MONGO_URL=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-npm run dev ```
-
----
-
-### 3. Frontend
-```bash
-cd frontend
-npm install
-npm run dev ```
+cd notekeeper
