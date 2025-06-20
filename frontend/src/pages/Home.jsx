@@ -42,9 +42,11 @@ export default function Home() {
         </p>
       )}
    
-      <div className="w-full max-w-3xl mt-14">
-        <AddNote />
-      </div>
+
+  
+  <div className="w-full mt-auto flex justify-end sticky">
+    <AddNote />
+  </div>
     </div>
   );
 }

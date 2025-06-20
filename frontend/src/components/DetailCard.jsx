@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../services/api.js";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -17,10 +17,10 @@ export default function DetailCard({ note }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`https://mern-notes-backend-5z2j.onrender.com/deleteNote/${note._id}`)
+        api
+          .delete(`/deleteNote/${note?._id}`)
           .then(() => {
-            navigate("/");
+            navigate("/dashboard");
             Swal.fire("Deleted!", "Your note has been deleted.", "success");
           })
           .catch((err) => console.error(err));
@@ -30,10 +30,13 @@ export default function DetailCard({ note }) {
 
   return (
     <div className="max-w-3xl mx-auto mt-10 bg-white/90 shadow-xl rounded-2xl p-8 space-y-6">
+     
+     
       <h1 className="text-3xl font-bold text-indigo-700">{note.title}</h1>
       <p className="text-gray-700 text-lg whitespace-pre-wrap">{note.details}</p>
 
       <div className="flex justify-end gap-4 pt-4 border-t border-gray-200">
+        
         <Link
           to={`/edit/${note._id}`}
           className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-700 transition duration-200"
@@ -46,6 +49,7 @@ export default function DetailCard({ note }) {
         >
           Delete
         </button>
+        
       </div>
     </div>
   );
