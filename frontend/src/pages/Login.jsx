@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -70,19 +71,19 @@ export default function Login() {
 
   <button
     type="submit"
-    className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    className=" cursor-pointer w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
   >
     Login
   </button>
 </form>
 
 
-        <p className="text-center text-white/80 text-sm">
-          Don’t have an account?{" "}
-          <a href="/signup" className="text-white font-semibold hover:underline">
-            Sign up
-          </a>
-        </p>
+<p className="text-center text-white/80 text-sm">
+  Don’t have an account?{" "}
+  <Link to="/signup" className="text-white font-semibold hover:underline">
+    Sign up
+  </Link>
+</p>
       </div>
     </div>
   );

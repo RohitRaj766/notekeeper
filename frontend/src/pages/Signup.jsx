@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -67,18 +68,18 @@ export default function Signup() {
 
           <button
             type="submit"
-            className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className=" cursor-pointer w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Register
           </button>
         </form>
 
-        <p className="text-center text-white/80 text-sm">
-          Already have an account?{" "}
-          <a href="/login" className="text-white font-semibold hover:underline">
-            Login
-          </a>
-        </p>
+    <p className="text-center text-white/80 text-sm">
+  Already have an account?{" "}
+  <Link to="/login" className="text-white font-semibold hover:underline">
+    Login
+  </Link>
+</p>
       </div>
     </div>
   );
