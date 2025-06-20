@@ -27,7 +27,7 @@ A simple and secure web application to save, search, and manage your important n
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/yourusername/notekeeper.git
-cd notekeeper
+cd notekeeper ```
 
 ---
 
@@ -38,7 +38,7 @@ npm install
 PORT=5000
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-npm run dev
+npm run dev ```
 
 ---
 
@@ -46,4 +46,4 @@ npm run dev
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run dev ```
