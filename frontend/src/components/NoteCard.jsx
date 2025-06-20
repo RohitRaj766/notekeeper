@@ -20,7 +20,7 @@ export default function NoteCard({ note }) {
         </Link>
       </div>
 
-      <p className="text-gray-700 text-sm line-clamp-4">{note.details}</p>
+      <pre className="text-gray-700 text-sm line-clamp-4">{note.details}</pre>
       {console.log("from NoteCard :: ", note.details)}
     </div>
   );
